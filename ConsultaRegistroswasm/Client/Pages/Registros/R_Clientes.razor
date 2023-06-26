@@ -22,7 +22,7 @@
 
                 <div class="mb-3">
                     <label class="form-label" for="Nombre">Nombre:</label>
-                    <InputDate @bind-Value="Cliente.Nombre" class="form-control" />
+                    <InputText @bind-Value="Cliente.Nombre" class="form-control" />
                     <ValidationMessage For="@(() => Cliente.Nombre)" />
                 </div>
 

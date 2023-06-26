@@ -199,14 +199,14 @@
       "netstandard.dll": "sha256-OYYuPT3JUknj4LdYIa58zF7kDB3tCnLzjCSuhEjtKXM=",
       "System.Private.CoreLib.dll": "sha256-EVS7zPxPV\/41g2mzPwdXtwiigWxI\/SeAHme1IgyD6tc=",
       "ConsultaRegistroswasm.Shared.dll": "sha256-MO7irrysK6ufQCrb+B7Zk\/XB1fqGMTkNvtUJ0gKwsuU=",
-      "ConsultaRegistroswasm.Client.dll": "sha256-MdJUwVC0BBlJkpecF\/4MOHkvBdel8DhYoCAdEbFuHdM="
+      "ConsultaRegistroswasm.Client.dll": "sha256-zJeq1isGrJsQGNidFAfI+E5M1qu5ZkZ\/ze3GCYBFFJU="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
       "ConsultaRegistroswasm.Shared.pdb": "sha256-jJB7vRbJ2fmt8UrhaZkycDkntiL3Ycb6IGi4DcB++FU=",
-      "ConsultaRegistroswasm.Client.pdb": "sha256-TsVws1llw8YX6aATlMRtQmTuYncXqeYfIF+L2buXG4E="
+      "ConsultaRegistroswasm.Client.pdb": "sha256-xNmQobh69nmI6iyzgOuiuUX5Lvf2BuEOxw5GhrIaUg4="
     },
     "runtime": {
       "dotnet.7.0.5.pspoayobxm.js": "sha256-codB25EodaFEP43MDCfMBuKXU4LqurUKnQrpoMIFnPs=",
