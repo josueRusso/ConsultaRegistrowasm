@@ -1,0 +1,119 @@
+﻿@page "/Prioridad"
+@page "/Prioridad/{PrioridadId:int}"
+@inject HttpClient httpClient
+
+<EditForm Model="Prioridad" OnValidSubmit="Guardar">
+    <DataAnnotationsValidator />
+
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h3>Registro de Prioridades.</h3>
+            </div>
+            <div class=card-body>
+
+                <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 col-xl-4">
+                    <label>Prioridad Id:</label>
+                    <div class="input-group mb-3">
+                        <InputNumber @bind-Value="Prioridad.PrioridadId" class="form-control" aria-describedby="BotonBuscar" />
+                        <button @onclick="Buscar" class="btn btn-outline-primary" type="button" id="BotonBuscar"><i class="oi oi-magnifying-glass" /></button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label" for="Descripcion">Descripcion:</label>
+                    <InputDate @bind-Value="Prioridad.Descripcion" class="form-control" />
+                    <ValidationMessage For="@(() => Prioridad.Descripcion)" />
+                </div>
+
+                <div Class="form-group mt-3">
+                    <label class="row-text"> Dias Compromiso </label>
+                    <div class="input-group">
+                        <input type="date" @bind-value="Prioridad.DiasCompromiso" />
+                        <ValidationMessage For="@(() => Prioridad.DiasCompromiso)" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-footer d-flex justify-content-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-outline-primary" @onclick="Nuevo">Nuevo <i class="oi oi-file" /></button>
+                    <button type="submit" class="btn btn-outline-success">Guardar <i class="oi oi-document" /></button>
+                    <button type="button" class="btn btn-outline-danger" @onclick="Eliminar">Eliminar <i class="oi oi-trash" /></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</EditForm>
+<label>@Mensaje</label>
+
+
+@code {
+
+    [Parameter]
+
+    public int PrioridadId { get; set; }
+
+    public Prioridades Prioridad { get; set; } = new Prioridades();
+
+    public string Mensaje { get; set; } = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (PrioridadId > 0)
+        {
+            this.Prioridad.PrioridadId = PrioridadId;
+            await Buscar();
+        }
+    }
+
+    public async Task Buscar()
+    {
+        var PrioridadEncontrado = await httpClient.GetFromJsonAsync<Prioridades>($"api/Prioridades/{Prioridad.PrioridadId}");
+        if (PrioridadEncontrado != null)
+        {
+            this.Prioridad = PrioridadEncontrado;
+            StateHasChanged();
+        }
+        else
+        {
+            Mensaje = "Prioridad no encontrado";
+        }
+    }
+
+    public async void Guardar()
+    {
+        using var response = await httpClient.PostAsJsonAsync("api/Prioridades", Prioridad);
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        var PrioridadDevuelto = await response.Content.ReadFromJsonAsync<Prioridades>();
+        if (PrioridadDevuelto is not null)
+        {
+            Prioridad = PrioridadDevuelto;
+            StateHasChanged();
+        }
+    }
+
+    public void Nuevo()
+    {
+        this.Prioridad = new Prioridades();
+        Mensaje = string.Empty;
+    }
+
+    public async Task Eliminar()
+    {
+        using var response = await httpClient.DeleteAsync($"api/Prioridades/{Prioridad.PrioridadId}");
+        if (!response.IsSuccessStatusCode)
+        {
+            Mensaje = response.ReasonPhrase ?? "error";
+            return;
+        }
+        else
+            Nuevo();
+    }
+}

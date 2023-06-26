@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\ConsultaRegistroswasm.Server.props" />
+</Project>

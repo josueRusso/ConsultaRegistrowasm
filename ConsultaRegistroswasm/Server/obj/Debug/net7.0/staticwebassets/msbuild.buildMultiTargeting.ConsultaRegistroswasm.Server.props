@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ConsultaRegistroswasm.Server.props" />
+</Project>
